@@ -23,14 +23,6 @@ describe('Feathers application tests (with jest)', () => {
     server.close(done);
   });
 
-  it('starts and shows the index page', async () => {
-    expect.assertions(1);
-
-    const { data } = await axios.get(getUrl());
-
-    expect(data.indexOf('<html lang="en">')).not.toBe(-1);
-  });
-
   describe('404', () => {
     it('shows a 404 HTML page', async () => {
       expect.assertions(2);
