@@ -4,5 +4,9 @@
   "paginate": {
     "default": 10,
     "max": 50
+  },
+  "postgres": {
+    "client": "pg",
+    "connection": "postgres://kef:kefir@192.168.0.130:14001/keflavik"
   }
 }

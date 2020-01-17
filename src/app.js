@@ -12,6 +12,8 @@ const services = require('./services');
 const appHooks = require('./app.hooks');
 const channels = require('./channels');
 
+const objection = require('./objection');
+
 const app = express(feathers());
 
 // Load app configuration
@@ -25,6 +27,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Set up Plugins and providers
 app.configure(express.rest());
+
+app.configure(objection);
 
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);
