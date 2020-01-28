@@ -1,8 +1,8 @@
 const app = require('../../src/app');
 
-describe("'GeodataLayerSchemes' service", () => {
+describe("'GeodataLayerObjectSchemes' service", () => {
   it('registered the service', () => {
-    const service = app.service('schemes');
+    const service = app.service('objects');
     expect(service).toBeTruthy();
   });
 });

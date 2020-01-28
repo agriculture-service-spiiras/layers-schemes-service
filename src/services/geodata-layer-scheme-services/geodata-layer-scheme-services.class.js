@@ -1,6 +1,6 @@
 const { Service } = require('feathers-objection');
 
-exports.GeodataLayerSchemes = class GeodataLayerSchemes extends Service {
+exports.GeodataLayerSchemeServices = class GeodataLayerSchemeServices extends Service {
   constructor(options) {
     const { Model, ...otherOptions } = options;
 
@@ -9,10 +9,4 @@ exports.GeodataLayerSchemes = class GeodataLayerSchemes extends Service {
       model: Model,
     });
   }
-
-  // async create(data, params) {
-  //   return super.create(data, params);
-  // }
-
-  // async get(data, params) {}
 };

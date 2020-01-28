@@ -1,6 +1,6 @@
-// Initializes the `GeodataLayerSchemes` service on path `/rest`
+// Initializes the `GeodataLayerSchemes` service on path `/schemes`
 const { GeodataLayerSchemes } = require('./geodata-layer-schemes.class');
-const createModel = require('../../models/geodata-layer-schemes.model');
+const createModel = require('../../models/layer-scheme.model');
 const hooks = require('./geodata-layer-schemes.hooks');
 
 module.exports = function(app) {
@@ -10,10 +10,10 @@ module.exports = function(app) {
   };
 
   // Initialize our service with any options it requires
-  app.use('/rest', new GeodataLayerSchemes(options, app));
+  app.use('/schemes', new GeodataLayerSchemes(options, app));
 
   // Get our initialized service so that we can register hooks
-  const service = app.service('rest');
+  const service = app.service('schemes');
 
   service.hooks(hooks);
 };
