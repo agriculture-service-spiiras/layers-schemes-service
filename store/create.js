@@ -3,6 +3,40 @@ const uuid = require("uuid/v4");
 function createDataBase() {
   const store = [
     {
+      id: "impassable_areas",
+      childLayers: [],
+      options: {},
+      services: [
+        {
+          service: "static",
+          options: {}
+        },
+        {
+          service: "editable",
+          options: {
+            draw: {
+              toolbar: {
+                buttons: {
+                  polygon: "Draw new impassable area"
+                }
+              },
+              polyline: false,
+              polygon: true,
+              rectangle: false,
+              circle: false,
+              marker: false,
+              circlemarker: false
+            },
+            edit: {}
+          }
+        }
+      ],
+      objects: {
+        endpoint: "namespace:shapefile",
+        format: {}
+      }
+    },
+    {
       id: "unmanned_aerial_vehicle",
       childLayers: [],
       options: {},
