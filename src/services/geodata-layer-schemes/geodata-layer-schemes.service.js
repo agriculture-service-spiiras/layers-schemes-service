@@ -7,6 +7,15 @@ module.exports = function(app) {
   const options = {
     Model: createModel(app),
     paginate: app.get('paginate'),
+
+    allowedEager: '[objects, services, childLayers]',
+    allowedUpsert: '[childLayers, services, objects]',
+    upsertGraphOptions: {
+      relate: ['services'],
+      unrelate: ['services'],
+      noInsert: ['services'],
+    },
+    createUseUpsertGraph: true,
   };
 
   // Initialize our service with any options it requires

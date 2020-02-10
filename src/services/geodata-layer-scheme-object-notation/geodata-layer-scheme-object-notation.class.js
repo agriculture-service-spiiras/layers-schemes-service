@@ -1,6 +1,6 @@
 const { Service } = require('feathers-objection');
 
-exports.GeodataLayerObjectSchemes = class GeodataLayerObjectSchemes extends Service {
+exports.GeodataLayerSchemeObjectNotation = class GeodataLayerSchemeObjectNotation extends Service {
   constructor(options) {
     const { Model, ...otherOptions } = options;
 
