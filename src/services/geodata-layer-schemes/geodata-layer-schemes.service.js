@@ -8,6 +8,7 @@ module.exports = function(app) {
     Model: createModel(app),
     paginate: app.get('paginate'),
 
+    whitelist: ['$eager', '$pick'],
     allowedEager: '[objects, services, childLayers]',
     allowedUpsert: '[childLayers, services, objects]',
     upsertGraphOptions: {

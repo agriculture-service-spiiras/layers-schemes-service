@@ -10,12 +10,6 @@ exports.GeodataLayerSchemes = class GeodataLayerSchemes extends Service {
     });
   }
 
-  async get(id, params) {
-    return this.Model.query()
-      .findById(id)
-      .withGraphFetched('[childLayers, services, objects]');
-  }
-
   async remove(id, params) {
     return await this.Model.transaction(async trx => {
       const scheme = await this.Model.query(trx).findById(id);
