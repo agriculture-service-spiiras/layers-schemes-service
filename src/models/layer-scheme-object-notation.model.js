@@ -10,11 +10,12 @@ class LayerSchemeObjectNotation extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['name', 'schemeId'],
+      required: ['name', 'dataSourceFeature', 'schemeId'],
 
       properties: {
         id: { type: 'integer' },
         name: { type: 'string' },
+        dataSourceFeature: { type: 'string' },
         schemeId: { type: 'integer' },
         objectFormat: {
           type: 'object',
@@ -59,6 +60,7 @@ module.exports = function(app) {
             .createTable('geodata_layer_scheme_object_notation', table => {
               table.increments('id');
               table.string('name');
+              table.string('dataSourceFeature');
               table.integer('schemeId');
               table.json('objectFormat');
               table.timestamp('createdAt');
