@@ -10,11 +10,12 @@ class LayerScheme extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['name'],
+      required: ['name', 'dataSource'],
 
       properties: {
         id: { type: 'integer' },
         name: { type: 'string' },
+        dataSource: { type: 'string' },
         parentId: { type: ['integer', 'null'] },
       },
     };
@@ -68,6 +69,26 @@ class LayerScheme extends Model {
     };
   }
 
+  static async beforeDelete({ asFindQuery, transaction }) {
+    const querySchemes = await asFindQuery().select('id');
+    const deletedSchemes = querySchemes.map(({ id }) => id);
+
+    await LayerScheme.relatedQuery('objects', transaction)
+      .for(deletedSchemes)
+      .delete();
+    await LayerScheme.relatedQuery('services', transaction)
+      .for(deletedSchemes)
+      .unrelate();
+
+    // TODO: два раза ищет дочернии слои, сделать одним запросом
+    const children = await LayerScheme.relatedQuery('childLayers').for(deletedSchemes);
+    if (children.length > 0) {
+      await LayerScheme.relatedQuery('childLayers', transaction)
+        .for(deletedSchemes)
+        .delete();
+    }
+  }
+
   $beforeInsert() {
     this.createdAt = this.updatedAt = new Date().toISOString();
   }
@@ -110,6 +131,7 @@ module.exports = function(app) {
             .createTable('geodata_layer_schemes', table => {
               table.increments('id');
               table.string('name');
+              table.string('dataSource');
               table.integer('parentId');
               table.timestamp('createdAt');
               table.timestamp('updatedAt');

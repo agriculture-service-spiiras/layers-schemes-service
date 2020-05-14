@@ -9,8 +9,8 @@ module.exports = function(app) {
     paginate: app.get('paginate'),
 
     whitelist: ['$eager', '$pick'],
-    allowedEager: '[objects, services, childLayers]',
-    allowedUpsert: '[childLayers, services, objects]',
+    allowedEager: '[objects, services, childLayers.^]',
+    allowedUpsert: '[childLayers.^, objects]',
     upsertGraphOptions: {
       relate: ['services'],
       unrelate: ['services'],
